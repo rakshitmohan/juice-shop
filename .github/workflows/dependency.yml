@@ -1,12 +1,13 @@
-name: 'Dependency Review'
-on: [pull_request]
-permissions:
-  contents: read
+name: Example workflow for Node using Snyk
+on: push
 jobs:
-  dependency-review:
+  security:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v3
-      - name: Dependency Review
-        uses: actions/dependency-review-action@v2
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
