@@ -1,5 +1,5 @@
 name: Example workflow for Node using Snyk
-on: push
+on: [pull_request]
 jobs:
   security:
     runs-on: ubuntu-latest
@@ -15,3 +15,6 @@ jobs:
           args: --severity-threshold=high --json-file-output=snyk.json
       - name: Show output
         run: cat snyk.json
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          path: snyk.json
