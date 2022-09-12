@@ -15,9 +15,7 @@ jobs:
         with:
           args: --severity-threshold=high --json-file-output=snyk.json
       - name: Show output
-        run: cat snyk.json
-      - name: Trim output 
-        run: cat synk.json | head -10 | tee newoutput.json
+        run: cat snyk.json | head -10 | tee output.json
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
-          path: newoutput.json
+          path: output.json
