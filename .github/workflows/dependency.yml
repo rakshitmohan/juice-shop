@@ -39,8 +39,11 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: monitor
           args: --severity-threshold=high --json-file-output=snyk.json
+      - name: Snyk monitor
+        run: snyk monitor
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           
       - name: curl
         uses: wei/curl@v1
