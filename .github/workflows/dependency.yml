@@ -7,6 +7,8 @@ jobs:
       - uses: actions/checkout@master
       - name: Run npm
         run: npm install 
+      - name: Install snyk
+        run: npm i snyk
       - name: Login
         uses: atlassian/gajira-login@master
         env:
