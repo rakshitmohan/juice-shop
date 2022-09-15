@@ -40,6 +40,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high --json-file-output=snyk.json
+          command: monitor
       - name: curl
         uses: wei/curl@v1
         with:
