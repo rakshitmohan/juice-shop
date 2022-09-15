@@ -42,15 +42,18 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high --json-file-output=snyk.json
-      - name: Snyk monitor
-        run: snyk monitor
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
           
       - name: curl
         uses: wei/curl@v1
         with:
          args: --location --request POST 'https://rakshitmohan99.atlassian.net/rest/api/3/issue/${{ steps.create.outputs.issue }}/attachments' -u 'rakshitmohan99@gmail.com:${{ secrets.JIRA }}' -H 'X-Atlassian-Token:no-check' --form 'file=@"snyk.json"'
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
       
    
         
